@@ -19,8 +19,12 @@ from google.appengine.ext import webapp
 from google.appengine.ext.webapp import util
 from google.appengine.ext.webapp import template
 
+class CharDecoder(dict):
+	def __missing__(self, key):
+		return key
+
 class MainHandler(webapp.RequestHandler):
-	charDecoder = {
+	charDecoder = CharDecoder({
 		"a": "alfa",
 		"b": "bravo",
 		"c": "charlie",
@@ -47,21 +51,15 @@ class MainHandler(webapp.RequestHandler):
 		"x": "xray",
 		"y": "yankee",
 		"z": "zulu"
-	}
+	})
 
-	page_template = ''
-
-	def decode_char(self, char):
-		decoded = self.charDecoder[char]
-		if decoded is None:
-			decoded = char
-		return decoded + ' '
-	
 	def get(self, input_text):
 		app_title = 'Text to semaphore pronunciation'
 		output_text = ''
+		output_sep = ''
 		for c in input_text:
-			output_text += self.decode_char(c)
+			output_text += output_sep + self.charDecoder[c.lower()]
+			if output_sep == '': output_sep = ' '
 
 		template_values = { 'app_title': app_title, 'input_text': input_text, 'output_text': output_text}
 		path = os.path.join(os.path.dirname(__file__), 'templates/text2semaphore.html')
