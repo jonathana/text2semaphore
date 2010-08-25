@@ -1,8 +1,13 @@
 application: text2semaphore
-version: 1
+version: 2
 runtime: python
 api_version: 1
 
 handlers:
+- url: /favicon.ico
+  static_files: static/images/favicon.ico
+  upload: static/images/favicon.ico
+
 - url: .*
   script: main.py
+
