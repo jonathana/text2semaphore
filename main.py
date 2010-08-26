@@ -63,7 +63,6 @@ class MainHandler(webapp.RequestHandler):
 
 		template_values = { 'app_title': app_title, 'input_text': input_text, 'output_text': output_text}
 		path = os.path.join(os.path.dirname(__file__), 'templates/text2semaphore.html')
-		#foobar = template.render(path, template_values)
 		self.response.out.write(template.render(path, template_values))
 
 def main():
