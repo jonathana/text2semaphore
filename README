@@ -1,0 +1,36 @@
+text2semaphore
+
+This is a Google App Engine (GAE) python application I wrote to take a string of
+alphanumeric+underscore characters and convert all the letters to their ICAO
+spelling alphabet (http://en.wikipedia.org/wiki/ICAO_spelling_alphabet)
+telephony equivalent word.  Numbers and the underscore are returned
+unconverted.
+
+The intended UI for using this was via browser URL bar (awesome bar, whatever
+the cool kids are calling it these days).  You enter whatever you want
+expanded as the pathname of the URL and the application returns the
+telephony equivalent of the pathname in the body of the response.
+
+There is an HTML form with some rudimentary javascript automation to handle
+the process of driving the URL pathname rewriting for those who are more
+comfortable with using an HTML form.
+
+Finally, programmatic access is provided by doing a GET on the pathname
+you want translated with an Accept: header that indicates text/plain is the
+preferred (or only) format wanted.  In this case, the entire response body
+will be just the telephony equivalent with a space between each
+word/number/underscore, and an Content-Type header of text/plain.
+
+The code should be easily adaptable to pretty much any other python web
+framework.  If you really feel a need to have your own GAE instance of it,
+come up with your own favicon.ico and application name, and have at it.
+
+My interest in doing this was because I work on travel industry
+software and we are continually working with confirmation numbers and "record
+locators" and communicating them to others.  Everybody in the industry uses
+their own mnemonic words that they adapt when they have temporary brain lock.
+I can never remember a good set of mnemonic words for letters in a rush, so I
+wanted to see if having this would help me.
+
+The code is released under an MIT license.  Have fun if you really think it
+has use.  Patches/suggestions welcome.
