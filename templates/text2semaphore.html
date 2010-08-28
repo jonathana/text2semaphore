@@ -1,10 +1,30 @@
 <html>
   <head>
   	<title>{{app_title}}</title>
+	<script type="text/javascript">//<![CDATA[
+		function submit_pronounce()
+		{
+			var inputText = document.frmMain.inputText.value;
+			if (inputText == '') { return false; }
+			document.location.pathname = '/' + encodeURI(inputText);
+			{%  comment %}
+			//  we're already gone here
+			{%  endcomment %}
+			return false;
+		}
+	//]]></script>
   </head>
   <body>
-	<h3>{{app_title}}:</h3>
+	<h3>{{app_title}}</h3>
+	<form name="frmMain">
+	<label for="inputText">Text to convert (200 characters, max):</label>
+	<br/>
+	<input type="text" name="inputText" maxlength="200" size="50"/>
+	<input type="button" name="pronounce" value="pronounce" onclick="submit_pronounce();"</input>
+	</form>
+	{% if input_text  %}
 	<div>{{input_text}} = {{output_text}}</div>
+	{% endif %}
   </body>
 </html>
 

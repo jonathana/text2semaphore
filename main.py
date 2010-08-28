@@ -66,7 +66,7 @@ class MainHandler(webapp.RequestHandler):
 		self.response.out.write(template.render(path, template_values))
 
 def main():
-	application = webapp.WSGIApplication([(r'/(\w+)', MainHandler)],
+	application = webapp.WSGIApplication([(r'/(\w*)', MainHandler)],
 										 debug=True)
 	util.run_wsgi_app(application)
 
