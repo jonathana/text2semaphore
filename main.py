@@ -59,7 +59,8 @@ class MainHandler(webapp.RequestHandler):
 		"w": "whiskey",
 		"x": "xray",
 		"y": "yankee",
-		"z": "zulu"
+		"z": "zulu",
+		"_": "underscore"
 	})
 
 	def get(self, input_text):
@@ -70,7 +71,7 @@ class MainHandler(webapp.RequestHandler):
 			output_text += output_sep + self.charDecoder[c.lower()]
 			if output_sep == '': output_sep = ' '
 
-		if self.request.accept.first_match(['text/html', 'text/plain']) == 'text/plain':
+		if self.request.accept.first_match(['text/html', 'text/plain']) == 'text/plain' or 'X-txt2sema4-android-screwage'.lower() in self.request.headers:
 			self.response.headers['Content-Type'] = 'text/plain'
 			self.response.out.write(output_text)
 			return
